@@ -4,6 +4,8 @@ import com.gestionproduits.dto.ProduitDTO;
 import com.gestionproduits.entities.Categorie;
 import com.gestionproduits.entities.Produit;
 import com.gestionproduits.repos.ProduitRepository;
+import org.modelmapper.ModelMapper;
+import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,9 @@ public class ProduitServiceImpl implements ProduitService {
 	
 	@Autowired
 	ProduitRepository produitRepository;
+
+	@Autowired
+	ModelMapper modelMapper;
 
 	@Override
 	public ProduitDTO saveProduit(ProduitDTO p) {
@@ -86,6 +91,10 @@ public class ProduitServiceImpl implements ProduitService {
 	@Override
 	public ProduitDTO convertEntityToDto(Produit produit) {
 
+		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
+		ProduitDTO produitDTO = modelMapper.map(produit, ProduitDTO.class);
+		return produitDTO;
+
 //		ProduitDTO produitDTO = new ProduitDTO();
 
 //		produitDTO.setIdProduit(produit.getIdProduit());
@@ -94,26 +103,30 @@ public class ProduitServiceImpl implements ProduitService {
 //		produitDTO.setDateCreation(produit.getDateCreation());
 //		produitDTO.setCategorie(produit.getCategorie());
 
-		return ProduitDTO.builder()
-				.idProduit(produit.getIdProduit())
-				.nomProduit(produit.getNomProduit())
-				.prixProduit(produit.getPrixProduit())
-				.dateCreation(produit.getDateCreation())
-				.categorie(produit.getCategorie())
-				.build();
+//		return ProduitDTO.builder()
+//				.idProduit(produit.getIdProduit())
+//				.nomProduit(produit.getNomProduit())
+//				.prixProduit(produit.getPrixProduit())
+//				.dateCreation(produit.getDateCreation())
+//				.categorie(produit.getCategorie())
+//				.build();
 	}
 
 	@Override
 	public Produit convertDtoToEntity(ProduitDTO pDto) {
-		Produit prod = new Produit();
 
-		prod.setIdProduit(pDto.getIdProduit());
-		prod.setNomProduit(pDto.getNomProduit());
-		prod.setPrixProduit(pDto.getPrixProduit());
-		prod.setDateCreation(pDto.getDateCreation());
-		prod.setCategorie(pDto.getCategorie());
+		Produit produit = modelMapper.map(pDto, Produit.class);
+		return produit;
 
-		return prod;
+//		Produit prod = new Produit();
+//
+//		prod.setIdProduit(pDto.getIdProduit());
+//		prod.setNomProduit(pDto.getNomProduit());
+//		prod.setPrixProduit(pDto.getPrixProduit());
+//		prod.setDateCreation(pDto.getDateCreation());
+//		prod.setCategorie(pDto.getCategorie());
+//
+//		return prod;
 
 	}
 
