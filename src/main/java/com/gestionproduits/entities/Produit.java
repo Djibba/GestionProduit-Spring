@@ -19,6 +19,10 @@ public class Produit {
 	
 	@ManyToOne
 	private Categorie categorie;
+
+
+	@OneToOne
+	private Image image;
 	
 	public Categorie getCategorie() {
 		return categorie;
@@ -60,6 +64,14 @@ public class Produit {
 	public void setDateCreation(Date dateCreation) {
 		this.dateCreation = dateCreation;
 	}
+	public Image getImage() {
+		return image;
+	}
+
+	public void setImage(Image image) {
+		this.image = image;
+	}
+
 	@Override
 	public String toString() {
 		return "Produit [idProduit=" + idProduit + ", nomProduit=" + nomProduit + ", prixProduit=" + prixProduit
