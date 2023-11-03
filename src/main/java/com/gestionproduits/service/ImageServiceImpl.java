@@ -16,6 +16,9 @@ public class ImageServiceImpl implements ImageService {
 
     @Autowired
     ImageRepository imageRepository;
+
+    @Autowired
+    ProduitService produitService;
     @Override
     public Image uploadImage(MultipartFile file) throws IOException {
         return imageRepository.save(Image.builder()
@@ -30,6 +33,7 @@ public class ImageServiceImpl implements ImageService {
 
         final Optional<Image> retrievedImage = imageRepository.findById(id);
         return Image.builder()
+                .idImage(retrievedImage.get().getIdImage())
                 .name(retrievedImage.get().getName())
                 .type(retrievedImage.get().getType())
                 .image(retrievedImage.get().getImage())
