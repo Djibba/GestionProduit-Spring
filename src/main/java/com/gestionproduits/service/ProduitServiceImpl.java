@@ -34,16 +34,16 @@ public class ProduitServiceImpl implements ProduitService {
 	@Override
 	public ProduitDTO updateProduit(ProduitDTO p) {
 
-		Long oldIdImage = produitRepository.findById(p.getIdProduit()).get().getImage().getIdImage();
-		Long newIdImage = p.getImage().getIdImage();
+//		Long oldIdImage = produitRepository.findById(p.getIdProduit()).get().getImage().getIdImage();
+//		Long newIdImage = p.getImage().getIdImage();
+//
+//		ProduitDTO produitUpdate =convertEntityToDto(produitRepository.save(convertDtoToEntity(p)));
 
-		ProduitDTO produitUpdate =convertEntityToDto(produitRepository.save(convertDtoToEntity(p)));
+//		if (oldIdImage != newIdImage) {
+//			imageRepository.deleteById(oldIdImage);
+//		}
 
-		if (oldIdImage != newIdImage) {
-			imageRepository.deleteById(oldIdImage);
-		}
-
-		return produitUpdate;
+		return convertEntityToDto(produitRepository.save(convertDtoToEntity(p)));
 	}
 
 	@Override

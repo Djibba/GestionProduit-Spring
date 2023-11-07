@@ -7,6 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/image")
 @CrossOrigin("*")
@@ -37,5 +39,15 @@ public class ImageRESTController {
     @RequestMapping(value = "/update", method = RequestMethod.PUT)
     public Image updateImage(@RequestParam("image")MultipartFile file) throws Exception {
         return imageService.uploadImage(file);
+    }
+
+    @PostMapping(value = "/uploadImageProd/{id}")
+    public Image uploadImagesProd(@RequestParam("image")MultipartFile file, @PathVariable("id") Long id) throws Exception {
+        return imageService.uploadImageProd(file, id);
+    }
+
+    @GetMapping(value = "/getImagesByProd/{id}")
+    public List<Image> getImagesByProd(@PathVariable("id") Long id) throws Exception {
+        return imageService.getImagesByProd(id);
     }
 }

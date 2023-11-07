@@ -24,7 +24,7 @@ public class Image {
     private byte[] image;
 
     @JsonIgnore
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "produit_id")
     private Produit produit;
 

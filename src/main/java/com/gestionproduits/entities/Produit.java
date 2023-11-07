@@ -3,6 +3,7 @@ package com.gestionproduits.entities;
 import jakarta.persistence.*;
 
 import java.util.Date;
+import java.util.List;
 
 //@Data
 //@NoArgsConstructor
@@ -20,9 +21,8 @@ public class Produit {
 	@ManyToOne
 	private Categorie categorie;
 
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "image_id")
-	private Image image;
+	@OneToMany(mappedBy = "produit")
+	private List<Image> images;
 	
 	public Categorie getCategorie() {
 		return categorie;
@@ -64,14 +64,14 @@ public class Produit {
 	public void setDateCreation(Date dateCreation) {
 		this.dateCreation = dateCreation;
 	}
-	public Image getImage() {
-		return image;
+
+	public List<Image> getImages() {
+		return images;
 	}
 
-	public void setImage(Image image) {
-		this.image = image;
+	public void setImages(List<Image> images) {
+		this.images = images;
 	}
-
 	@Override
 	public String toString() {
 		return "Produit [idProduit=" + idProduit + ", nomProduit=" + nomProduit + ", prixProduit=" + prixProduit
