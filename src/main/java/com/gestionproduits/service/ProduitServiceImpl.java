@@ -3,6 +3,7 @@ package com.gestionproduits.service;
 import com.gestionproduits.dto.ProduitDTO;
 import com.gestionproduits.entities.Categorie;
 import com.gestionproduits.entities.Produit;
+import com.gestionproduits.repos.ImageRepository;
 import com.gestionproduits.repos.ProduitRepository;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
@@ -21,8 +22,12 @@ public class ProduitServiceImpl implements ProduitService {
 	@Autowired
 	ModelMapper modelMapper;
 
+	@Autowired
+	ImageRepository imageRepository;
+
 	@Override
 	public ProduitDTO saveProduit(ProduitDTO p) {
+		p.setImage(imageRepository.save(p.getImage()));
 		return convertEntityToDto(produitRepository.save(convertDtoToEntity(p)));
 	}
 

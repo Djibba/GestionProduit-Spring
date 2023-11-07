@@ -1,6 +1,7 @@
 package com.gestionproduits.dto;
 
 import com.gestionproduits.entities.Categorie;
+import com.gestionproduits.entities.Image;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,5 +19,6 @@ public class ProduitDTO {
     private Double prixProduit;
     private Date dateCreation;
     private Categorie categorie;
+    private Image image;
 
 }

@@ -2,6 +2,7 @@ package com.gestionproduits.service;
 
 import com.gestionproduits.entities.Image;
 import com.gestionproduits.repos.ImageRepository;
+import com.gestionproduits.repos.ProduitRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -19,9 +20,13 @@ public class ImageServiceImpl implements ImageService {
 
     @Autowired
     ProduitService produitService;
+
+    @Autowired
+    ProduitRepository produitRepository;
     @Override
     public Image uploadImage(MultipartFile file) throws IOException {
         return imageRepository.save(Image.builder()
+
                 .name(file.getOriginalFilename())
                 .type(file.getContentType())
                 .image(file.getBytes())
